@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.graduationprojectspringboot.mapper.OrdersMapper">
+    <select id="selectAll" resultType="Orders">
+        select * from orders;
+    </select>
+    <select id="selectByUser" resultType="Orders">
+        select * from orders where uId=#{uId}
+    </select>
+    <select id="selectBySaveTime" resultType="Orders">
+        select * from orders where saveTime = #{saveTime}
+    </select>
+    <select id="selectByDate" resultType="java.util.HashMap">
+        select uName,sum(weight) as weight from users,orders
+        where users.uId = orders.uId and isTrade = 0
+        group by orders.uId
+        order by sum(weight) desc
+        limit 7
+    </select>
+    <select id="getWeightByDate" resultType="java.util.HashMap">
+        SELECT saveDate, SUM(weight) AS weight FROM orders GROUP BY saveDate
+    </select>
+</mapper>

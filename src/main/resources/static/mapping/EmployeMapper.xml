@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.graduationprojectspringboot.mapper.EmployeMapper">
+    <resultMap id="employeMap" type="Employe">
+        <id column="eId" property="eId"/>
+        <result column="eName" property="eName"/>
+        <result column="post" property="post"/>
+        <result column="eAddress" property="eAddress"/>
+        <collection property="list" ofType="salary">
+            <id property="sId" column="sId"/>
+            <result property="money" column="money"/>
+            <result property="salaryTime" column="salaryTime"/>
+        </collection>
+    </resultMap>
+    <select id="selectAll" resultMap="employeMap">
+        select *  from employe e,salary s where e.eId = s.eId
+    </select>
+
+    <select id="selectById" resultType="Employe">
+        select * from employe where eId = #{eId}
+    </select>
+</mapper>

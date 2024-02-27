@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.graduationprojectspringboot.mapper.SucOrdersMapper">
+    <resultMap id="sucOrders" type="SucOrders">
+        <id property="suId" column="suId"/>
+    </resultMap>
+    <select id="selectAll" resultType="sucOrders">
+        select * from sucorders
+    </select>
+    <select id="selectByUId" resultType="SucOrders">
+        select * from sucorders where uid = #{uid}
+    </select>
+    <select id="selectById" resultType="SucOrders">
+        select  * from sucorders where suid = #{id}
+    </select>
+    <select id="selectByDate" resultType="java.util.HashMap">
+        select distinct payDate, sum(payMoney) as payMoney from sucorders group by payDate
+    </select>
+</mapper>
